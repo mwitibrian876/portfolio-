@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brian Mwiti</title>
+  <style>
+    /* ====== RESET ====== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0a0a0a, #000);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a { color: #58a6ff; text-decoration: none; }
+    .about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.profile-pic {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(155, 94, 255, 0.6);
+  box-shadow: 0 0 25px rgba(155, 94, 255, 0.4);
+  transition: 0.3s;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-pic:hover {
+  box-shadow: 0 0 35px rgba(155, 94, 255, 0.8);
+  transform: scale(1.05);
+}
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  font-size: 2rem;
+  color: #eee;
+  transition: 0.3s;
+}
+
+.social-icon.linkedin:hover {
+  color: #0a66c2;
+  text-shadow: 0 0 15px #0a66c2;
+}
+
+.social-icon.github:hover {
+  color: #9b5eff;
+  text-shadow: 0 0 15px #9b5eff;
+}
+
+
+
+    /* ====== STAR BACKGROUND ====== */
+    #stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0; left: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* ====== NAV ====== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      z-index: 10;
+    }
+    nav a {
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #9b5eff; }
+
+    /* ====== HERO ====== */
+    header {
+      height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 2rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 15px #9b5eff;
+    }
+    header h2 {
+      font-size: 1.5rem;
+      min-height: 40px;
+    }
+    .typing {
+      border-right: 2px solid #9b5eff;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    /* ====== SECTION ====== */
+    section {
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+    h2.section-title {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      color: #9b5eff;
+    }
+
+    /* ====== CARDS ====== */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(155, 94, 255, 0.3);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 25px rgba(155, 94, 255, 0.6);
+    }
+    .contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.contact-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(155, 94, 255, 0.3);
+  color: #eee;
+}
+
+.contact-info p {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+}
+
+.contact-info a {
+  color: #9b5eff;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+
+    /* ====== CONTACT ====== */
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex; flex-direction: column; gap: 1rem;
+      background: rgba(5, 5, 5, 0.05);
+      padding: 2rem;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+    input, textarea {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    button {
+      padding: 0.8rem;
+      background: #49297cff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #7a3ce9; }
+  </style>
+</head>
+<body>
+  <!-- Star Background -->
+  <div id="stars"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <header>
+    <h1>Brian Mwiti</h1>
+    <h2><span class="typing"></span></h2>
+  </header>
+
+  <!-- About -->
+  <!-- ====== ABOUT ====== -->
+<section id="about">
+  <h2 class="section-title">About Me</h2>
+  <div class="about-container">
+    <!-- Profile Image -->
+    <div class="profile-pic">
+      <img src="C:\Users\Joker\OneDrive\Pictures\Documents\GitHub\max-github\WhatsApp Image 2025-09-05 at 12.01.47_9caed9a5.jpg" alt="Profile Picture">
+    </div>
+
+    <!-- About Text -->
+    <p>
+      Hello! I am Brian Mwiti, a passionate developer who loves building engaging, modern, 
+      and efficient web solutions.
+    </p>
+  </div>
+   <!-- Social Links -->
+    <div class="social-links">
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="social-icon linkedin">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/yourusername" target="_blank" class="social-icon github">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+
+</section>
+</section>
+<!-- ====== CONTACT ====== -->
+<section id="contact">
+  <h2 class="section-title">Contact Me</h2>
+
+  <div class="contact-container">
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <p><strong>Email:</strong> <a href="mwitibrian03@gmal.com">mwitibrian03gmail.com</a></p>
+      <p><strong>Phone:</strong> +254 113808993</p>
+      <p><strong>Location:</strong> meru, Kenya</p>
+      <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourprofile" target="www.linkedin.com/in/brian-mwiti-256110364">linkedin.com/in/yourprofile</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="card-container">
+      <div class="card">HTML5</div>
+      <div class="card">CSS3</div>
+      <div class="card">JavaScript</div>
+      <div class="card">PHP</div>
+      <div class="card">MySQL</div>
+      <div class="card">Problem Solving</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="card-container">
+      <div class="card">Social Media App — full-stack clone project</div>
+      <div class="card">Portfolio Website — interactive personal site</div>
+      <div class="card">Database Management Tool — SQL-based project</div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <form onsubmit="alert('Message sent!'); return false;">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <script>
+    /* === STAR BACKGROUND === */
+    const starContainer = document.getElementById('stars');
+    for (let i = 0; i < 80; i++) {
+      let star = document.createElement('div');
+      star.classList.add('star');
+      let size = Math.random() * 3 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      starContainer.appendChild(star);
+    }
+
+    /* === TYPEWRITER EFFECT === */
+    const roles = ["Software Developer", "Designer", "Problem Solver"];
+    let roleIndex = 0, charIndex = 0, currentText = "", typing = true;
+    const typingElement = document.querySelector(".typing");
+
+    function typeEffect() {
+      if (typing) {
+        if (charIndex < roles[roleIndex].length) {
+          currentText += roles[roleIndex].charAt(charIndex);
+          typingElement.textContent = currentText;
+          charIndex++;
+          setTimeout(typeEffect, 100);
+        } else {
+          typing = false;
+          setTimeout(typeEffect, 150);
+        }
+      } else {
+        if (charIndex > 0) {
+          currentText = currentText.slice(0, -1);
+          typingElement.textContent = currentText;
+          charIndex--;
+          setTimeout(typeEffect, 500);
+        } else {
+          typing = true;
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeEffect, 300);
+        }
+      }
+    }
+    typeEffect();
+
+    /* === SCROLL ANIMATION FOR CARDS === */
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(card => observer.observe(card));
+
+
+  </script>
+</body>
+</html>
